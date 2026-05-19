@@ -1,4 +1,3 @@
-import java.util.HashSet;
 import java.util.Scanner;
 
 class Solution {
@@ -6,7 +5,6 @@ class Solution {
     static int[] scores;
     static int[] cals;
     static int max;
-    static HashSet<String> visited;
 
     public static void main(String args[]) throws Exception {
         Scanner sc = new Scanner(System.in);
