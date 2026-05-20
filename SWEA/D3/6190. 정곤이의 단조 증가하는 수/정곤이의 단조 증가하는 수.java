@@ -13,30 +13,38 @@ class Solution {
             int n = Integer.parseInt(st.nextToken());
 
             st = new StringTokenizer(br.readLine());
-            int cnt = st.countTokens();
-            int[] num = new int[cnt];
+            int[] num = new int[n];
 
-            for (int i = 0; i < cnt; i++)
+            for (int i = 0; i < n; i++)
                 num[i] = Integer.parseInt(st.nextToken());
 
-            int max = -1;
-
-            for (int j = 0; j < cnt-1; j++) {
-                for (int l = j+1; l < cnt; l++) {
-                    String result = String.valueOf(num[j] * num[l]);
-                    boolean isMono = true;
-                    
-                    for (int len = 0; len < result.length()-1; len++) {
-                        if (result.charAt(len) > result.charAt(len+1)) {
-                            isMono = false;
-                            break;
-                        }
-                    }
-                    if (isMono && max < num[j] * num[l]) max = num[j] * num[l];
-                }
-            }
+            int max = getMax(n, num);
 
             System.out.println("#" + test_case + " " + max);
         }
+    }
+
+    // 단조 곱 중에서 최댓값 탐색
+    private static int getMax(int n, int[] num) {
+        int max = -1;
+
+        for (int i = 0; i < n -1; i++) {
+            for (int j = i+1; j < n; j++) {
+                int res = num[i] * num[j];
+                String strRes = String.valueOf(res);
+                boolean isMono = true; // 단조 여부
+
+                // 단조 여부 확인
+                for (int len = 0; len < strRes.length()-1; len++) {
+                    if (strRes.charAt(len) > strRes.charAt(len+1)) {
+                        isMono = false;
+                        break;
+                    }
+                }
+                
+                if (isMono && max < res) max = res;
+            }
+        }
+        return max;
     }
 }
